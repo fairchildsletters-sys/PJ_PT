@@ -3,6 +3,13 @@
 
 #include <string>
 
+enum class BookStatus
+{
+    AVAILABLE,
+    READ_ON_SITE,
+    MAINTENANCE
+};
+
 class Book
 {
 private:
@@ -12,37 +19,27 @@ public:
     std::string title;
     std::string author;
     std::string genre;
-    int status; // Value List
+    BookStatus status;
 
     int totalQuantity;
     int availableQuantity;
     int borrowCount; // Borrow History
 
     // Constructor
-    Book(std::string _id, std::string _title, std::string _author, std::string _genre, int _status, int _qty)
+    Book(std::string _id, std::string _title, std::string _author, std::string _genre, BookStatus _status, int _qty)
         : id(_id), title(_title), author(_author), genre(_genre), status(_status),
           totalQuantity(_qty), availableQuantity(_qty), borrowCount(0) {}
+
+    // Copy Constructor
+    Book(const Book &other)
+        : id(other.id), title(other.title), author(other.author), genre(other.genre),
+          status(other.status), totalQuantity(other.totalQuantity),
+          availableQuantity(other.availableQuantity), borrowCount(other.borrowCount) {}
 
     // Getters
     std::string getId() const
     {
         return id;
-    }
-
-    // Helper function: Handle Value List
-    std::string getStatusText() const
-    {
-        switch (status)
-        {
-        case 1:
-            return "Được phép mượn về";
-        case 2:
-            return "Chỉ đọc tại chỗ";
-        case 3:
-            return "Đang bảo trì";
-        default:
-            return "Không xác định"; // UI safety
-        }
     }
 
     // Overload operator==

@@ -5,6 +5,12 @@
 #include "BorrowRecord.h"
 #include "../datastructures/LinkedList.h"
 
+enum class ReaderType
+{
+    STUDENT,
+    TEACHER
+};
+
 class Reader
 {
 private:
@@ -12,13 +18,31 @@ private:
 
 public:
     std::string name;
-    int type; // Value List
+    ReaderType type;
+    long long debt;
 
+    // Only stores active borrow records
     LinkedList<BorrowRecord *> borrowList;
 
     // Constructor
-    Reader(std::string _id, std::string _name, int _type)
-        : id(_id), name(_name), type(_type) {}
+    Reader(std::string _id, std::string _name, ReaderType _type)
+        : id(_id), name(_name), type(_type), debt(0) {}
+
+    // Copy Constructor
+    Reader(const Reader &other)
+        : id(other.id), name(other.name), type(other.type), debt(other.debt)
+    {
+        Node<BorrowRecord *> *current = other.borrowList.getHead();
+        while (current != nullptr)
+        {
+            if (current->data != nullptr)
+            {
+                BorrowRecord *clonedRecord = new BorrowRecord(*(current->data));
+                this->borrowList.insertAtHead(clonedRecord);
+            }
+            current = current->next;
+        }
+    }
 
     // Destructor
     ~Reader()
@@ -36,20 +60,6 @@ public:
     std::string getId() const
     {
         return id;
-    }
-
-    // Helper function: Handle Value List
-    std::string getTypeText() const
-    {
-        switch (type)
-        {
-        case 0:
-            return "Sinh viên";
-        case 1:
-            return "Giảng viên";
-        default:
-            return "Không xác định"; // UI safety
-        }
     }
 
     // Overload operator==

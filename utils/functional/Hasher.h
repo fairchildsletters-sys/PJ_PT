@@ -14,14 +14,14 @@ template <>
 struct Hasher<std::string>
 {
     // DJB2 Hashing
-    static inline size_t hash(const std::string &key, size_t capacity)
+    static inline size_t hash(const std::string &key)
     {
-        size_t hash = 5381;
+        size_t hashVal = 5381;
         for (char c : key)
         {
-            hash = ((hash << 5) + hash) + c; // hash * 33 + c
+            hashVal = ((hashVal << 5) + hashVal) + c; // hash * 33 + c
         }
-        return hash % capacity;
+        return hashVal; // only hash value
     }
 };
 

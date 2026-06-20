@@ -30,6 +30,13 @@ private:
     size_t size;
     size_t capacity;
 
+    // Internal hash gateway with compression
+    size_t hash(const K &key, size_t targetCapacity = 0) const
+    {
+        size_t cap = (targetCapacity == 0) ? this->capacity : targetCapacity;
+        return Hasher<K>::hash(key) % cap;
+    }
+
     // Rehashes when load factor is exceeded
     void rehash()
     {
@@ -41,7 +48,7 @@ private:
             Node<HashEntry<K, V>> *current = buckets[i].getHead();
             while (current != nullptr)
             {
-                size_t newIndex = Hasher<K>::hash(current->data.key, newCapacity);
+                size_t newIndex = hash(current->data.key, newCapacity);
                 newBuckets[newIndex].insertAtHead(current->data);
                 current = current->next;
             }
@@ -83,7 +90,7 @@ public:
             rehash();
         }
 
-        size_t index = Hasher<K>::hash(key, capacity);
+        size_t index = hash(key);
         Node<HashEntry<K, V>> *current = buckets[index].getHead();
 
         // Check if key already exists
@@ -101,53 +108,16 @@ public:
         return true;
     }
 
-    // Updates (EXISTING)
-    bool update(const K &key, V value)
-    {
-        size_t index = Hasher<K>::hash(key, capacity);
-        Node<HashEntry<K, V>> *current = buckets[index].getHead();
-
-        // Search for the existing key to update
-        while (current != nullptr)
-        {
-            if (current->data.key == key)
-            {
-                current->data.value = value;
-                return true;
-            }
-            current = current->next;
-        }
-
-        return false;
-    }
-
     // Removes (by key)
     bool remove(const K &key)
     {
-        size_t index = Hasher<K>::hash(key, capacity);
+        size_t index = hash(key);
         if (buckets[index].remove(HashEntry<K, V>(key, V())))
         {
             size--;
             return true;
         }
         return false;
-    }
-
-    // Gets value by key
-    V get(const K &key) const
-    {
-        size_t index = Hasher<K>::hash(key, capacity);
-        Node<HashEntry<K, V>> *current = buckets[index].getHead();
-
-        while (current != nullptr)
-        {
-            if (current->data.key == key)
-            {
-                return current->data.value;
-            }
-            current = current->next;
-        }
-        return V();
     }
 
     size_t getSize() const
@@ -163,6 +133,104 @@ public:
     bool isEmpty() const
     {
         return size == 0;
+    }
+
+    // =======================================================================
+    // Inner Iterator class
+    // =======================================================================
+    class Iterator
+    {
+    private:
+        const HashMap *map;
+        size_t bucketIndex;
+        Node<HashEntry<K, V>> *current;
+
+        // Advances to the next non-empty bucket
+        void advance()
+        {
+            while (current == nullptr && bucketIndex < map->capacity)
+            {
+                bucketIndex++;
+                if (bucketIndex < map->capacity)
+                {
+                    current = map->buckets[bucketIndex].getHead();
+                }
+            }
+        }
+
+    public:
+        Iterator(const HashMap *m, size_t index, Node<HashEntry<K, V>> *node)
+            : map(m), bucketIndex(index), current(node)
+        {
+            if (current == nullptr)
+            {
+                advance();
+            }
+        }
+
+        // Overloaded operators for iterator behavior
+        HashEntry<K, V> &operator*() const
+        {
+            return current->data;
+        }
+
+        HashEntry<K, V> *operator->() const
+        {
+            return &(current->data);
+        }
+
+        Iterator &operator++()
+        {
+            if (current != nullptr)
+            {
+                current = current->next;
+                if (current == nullptr)
+                {
+                    advance();
+                }
+            }
+            return *this;
+        }
+
+        bool operator==(const Iterator &other) const
+        {
+            return current == other.current && bucketIndex == other.bucketIndex;
+        }
+
+        bool operator!=(const Iterator &other) const
+        {
+            return !(*this == other);
+        }
+    };
+
+    // Returns the beginning iterator
+    Iterator begin() const
+    {
+        return Iterator(this, 0, capacity > 0 ? buckets[0].getHead() : nullptr);
+    }
+
+    // Returns the ending iterator
+    Iterator end() const
+    {
+        return Iterator(this, capacity, nullptr);
+    }
+
+    // Search by key (used for updating)
+    Iterator find(const K &key) const
+    {
+        size_t index = hash(key);
+        Node<HashEntry<K, V>> *current = buckets[index].getHead();
+
+        while (current != nullptr)
+        {
+            if (current->data.key == key)
+            {
+                return Iterator(this, index, current);
+            }
+            current = current->next;
+        }
+
+        return end();
     }
 };
 
