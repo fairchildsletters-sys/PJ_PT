@@ -42,6 +42,31 @@ Dự án này triển khai hệ thống quản lý thư viện theo yêu cầu h
 - Ứng dụng tự động load dữ liệu khi khởi động và lưu khi người dùng chọn "Save & Exit".
 
 ## Cấu trúc dự án
+├── datastructures/  
+│   ├── Node.h
+│   ├── LinkedList.h
+│   └── HashMap.h
+├── models/               
+│   ├── Book.h
+│   ├── Reader.h
+│   └── BorrowRecord.h
+├── manager/             
+│   └── LibraryManager.h
+├── utils/               
+│   └── functional/
+│       ├── Hasher.h
+│       ├── MathUtils.h
+│       ├── TimeUtils.h
+│       └── ReportStructs.h
+├── test                 
+│
+├── main.cpp              
+├── ConsoleUI.h 
+├── USAGE.md           
+└── data/           
+    ├── books.txt
+    ├── readers.txt
+    └── borrow_records.txt
 
 
 ## Công nghệ sử dụng
