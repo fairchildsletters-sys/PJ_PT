@@ -42,29 +42,7 @@ Dự án này triển khai hệ thống quản lý thư viện theo yêu cầu h
 - Ứng dụng tự động load dữ liệu khi khởi động và lưu khi người dùng chọn "Save & Exit".
 
 ## Cấu trúc dự án
-├── datastructures/       # Cấu trúc dữ liệu 
-│   ├── Node.h
-│   ├── LinkedList.h
-│   └── HashMap.h
-├── models/             
-│   ├── Book.h
-│   ├── Reader.h
-│   └── BorrowRecord.h
-├── manager/              # Nghiệp vụ chính của toàn bộ hệ thống
-│   └── LibraryManager.h
-├── utils/                # Tiện ích
-│   └── functional/
-│       ├── Hasher.h
-│       ├── MathUtils.h
-│       ├── TimeUtils.h
-│       └── ReportStructs.h
-├── test               # Bộ kiểm thử
-├── main.cpp              
-├── ConsoleUI.h / ConsoleUI.cpp # Giao diện CLI
-└── data/                 # File dữ liệu (text)
-    ├── books.txt
-    ├── readers.txt
-    └── borrow_records.txt
+
 
 ## Công nghệ sử dụng
 
@@ -79,26 +57,11 @@ Dự án này triển khai hệ thống quản lý thư viện theo yêu cầu h
 
 ## Hướng dẫn ngắn chạy 
 
-### Build (Windows PowerShell)
-```powershell
-mkdir build
-cd build
-cmake ..
-cmake --build . --config Debug
-```
-
 ### Run chương trình
-```powershell
-# Nếu build theo cấu hình Debug trên Windows
-.\Debug\LibraryManagement.exe
-```
+
 
 ### Chạy test
-```powershell
-.\Debug\LibraryTests.exe
-# Hoặc dùng ctest
-ctest --output-on-failure
-```
+
 
 ## Định dạng file dữ liệu (ví dụ)
 
