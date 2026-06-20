@@ -1,0 +1,5 @@
+├── data/
+│   ├── books.txt               # Cơ sở dữ liệu lưu trữ danh sách sách
+│   ├── readers.txt             # Cơ sở dữ liệu lưu trữ danh sách độc giả
+│   ├── borrow_records.txt      # Cơ sở dữ liệu lưu trữ giao dịch mượn/trả
+│   └── system.log              # File lưu lịch sử hoạt động (Log file)
