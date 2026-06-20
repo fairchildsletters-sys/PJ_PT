@@ -35,10 +35,6 @@ public:
         cleanUp();
     }
 
-    // Disable copy constructor and assignment operator
-    LibraryManager(const LibraryManager &) = delete;
-    LibraryManager &operator=(const LibraryManager &) = delete;
-
     void cleanUp()
     {
         // 1. Free all Book objects from Heap (Iterator)
@@ -55,6 +51,10 @@ public:
         }
         readers.clear();
     }
+
+    // Disable copy constructor and assignment operator
+    LibraryManager(const LibraryManager &) = delete;
+    LibraryManager &operator=(const LibraryManager &) = delete;
 
     // =======================================================================
     // MODULE 1: CORE DATA OPERATIONS (CRUD)
@@ -350,7 +350,7 @@ public:
             return ReturnOpStatus::ERR_NOT_FOUND;
         }
 
-        // Find the specific borrow record in reader's list
+        // Find the specific borrow record in reader's list (most overdue)
         Node<BorrowRecord *> *current = reader->borrowList.getHead();
         BorrowRecord *targetRecord = nullptr;
 
@@ -358,8 +358,10 @@ public:
         {
             if (current->data->bookId == bookId)
             {
-                targetRecord = current->data;
-                break;
+                if (targetRecord == nullptr || current->data->dueDate < targetRecord->dueDate)
+                {
+                    targetRecord = current->data;
+                }
             }
             current = current->next;
         }
