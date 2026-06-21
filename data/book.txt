@@ -1,5 +1,5 @@
 B001|C++ Primer|Stanley B. Lippman|Programming|AVAILABLE|4|4|25
-B002|Clean Code|Robert C. Martin|Programming|AVAILABLE|3|3|28
+B002|Clean Code|Robert C. Martin|Programming|AVAILABLE|3|1|28
 B003|Design Patterns|Erich Gamma|Software|READ_ON_SITE|2|2|22
 B004|The Pragmatic Programmer|Andrew Hunt|Programming|AVAILABLE|5|5|15
 B005|Introduction to Algorithms|Thomas H. Cormen|Algorithms|AVAILABLE|3|3|18
