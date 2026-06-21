@@ -1,0 +1,32 @@
+# --- Build artifacts ---
+build/
+bin/
+obj/
+out/
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+
+# --- IDE Configuration ---
+.vscode/
+.idea/
+*.suo
+*.user
+*.userossc
+*.sln
+*.vcxproj
+*.filters
+
+# --- OS garbage ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Log/temporary files ---
+*.log
