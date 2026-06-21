@@ -3,12 +3,16 @@
 #include <string>
 #include <limits>
 #include <iomanip>
+#include "utils/FileHandler.h"
+
+static const std::string BOOKS_FILE = "data/book.txt";
+static const std::string READERS_FILE = "data/readers.txt";
+static const std::string BORROW_RECORDS_FILE = "data/borrow_records.txt";
 
 // =======================================================================
 // UI HELPERS & DEFENSIVE PROGRAMMING
 // =======================================================================
 
-// Clears the input buffer to handle bad input
 void clearInputBuffer()
 {
     std::cin.clear();
@@ -259,8 +263,9 @@ void handleReaderMenu(LibraryManager &manager)
             std::string name = readString();
 
             int typeInt = readInt("Phân loại (0: Sinh viên, 1: Giảng viên): ");
+            long long debt = readLongLong("Nợ phạt ban đầu (VND, có thể nhập 0): ");
 
-            Reader newReader(id, name, static_cast<ReaderType>(typeInt));
+            Reader newReader(id, name, static_cast<ReaderType>(typeInt), debt);
             auto status = manager.addReader(newReader);
 
             if (status == LibraryManager::ReaderOpStatus::SUCCESS)
@@ -476,7 +481,6 @@ void handleReportMenu(LibraryManager &manager)
             }
             else
             {
-                // Table header (Total width: 76)
                 std::cout << std::left << std::setw(15) << "Mã Sách"
                           << " | " << std::setw(30) << "Tên Sách"
                           << " | " << std::setw(25) << "Tác giả\n";
@@ -504,7 +508,6 @@ void handleReportMenu(LibraryManager &manager)
             }
             else
             {
-                // Table header (Total width: 76)
                 std::cout << std::left << std::setw(15) << "Mã Sách"
                           << " | " << std::setw(30) << "Tên Sách"
                           << " | " << std::setw(25) << "Tác giả\n";
@@ -532,7 +535,6 @@ void handleReportMenu(LibraryManager &manager)
             }
             else
             {
-                // Table header (Total width: 102)
                 std::cout << std::left << std::setw(10) << "Top"
                           << " | " << std::setw(15) << "Mã Sách"
                           << " | " << std::setw(30) << "Tên Sách"
@@ -542,7 +544,6 @@ void handleReportMenu(LibraryManager &manager)
 
                 int rank = 1;
                 Node<BookReport> *current = reportList.getHead();
-                // Limit output to Top 5
                 while (current != nullptr && rank <= 5)
                 {
                     std::cout << std::left << std::setw(10) << rank
@@ -562,6 +563,63 @@ void handleReportMenu(LibraryManager &manager)
     }
 }
 
+bool loadLibraryData(LibraryManager &manager)
+{
+    manager.cleanUp();
+
+    bool booksLoaded = FileHandler::loadBooks(BOOKS_FILE, manager.getBooks());
+    bool readersLoaded = FileHandler::loadReaders(READERS_FILE, manager.getReaders());
+    bool borrowLoaded = FileHandler::loadBorrowRecords(BORROW_RECORDS_FILE, manager.getReaders(), manager.getBooks());
+
+    return booksLoaded && readersLoaded && borrowLoaded;
+}
+
+bool saveLibraryData(LibraryManager &manager)
+{
+    bool booksSaved = FileHandler::saveBooks(BOOKS_FILE, manager.getBooks());
+    bool readersSaved = FileHandler::saveReaders(READERS_FILE, manager.getReaders());
+    bool borrowSaved = FileHandler::saveBorrowRecords(BORROW_RECORDS_FILE, manager.getReaders());
+
+    return booksSaved && readersSaved && borrowSaved;
+}
+
+void handleFileIOMenu(LibraryManager &manager)
+{
+    while (true)
+    {
+        std::cout << "\n--- 5. LƯU / TẢI DỮ LIỆU (FILE I/O) ---\n";
+        std::cout << "1. Tải dữ liệu từ file\n2. Lưu dữ liệu ra file\n0. Quay lại\n";
+        int choice = readInt("Chọn: ");
+
+        if (choice == 0)
+            break;
+
+        switch (choice)
+        {
+        case 1:
+        {
+            if (loadLibraryData(manager))
+                std::cout << "-> Dữ liệu đã được nạp thành công từ file.\n";
+            else
+                std::cout << "-> [Lỗi] Không thể nạp dữ liệu từ file. Vui lòng kiểm tra file.\n";
+            pauseConsole();
+            break;
+        }
+        case 2:
+        {
+            if (saveLibraryData(manager))
+                std::cout << "-> Dữ liệu đã được lưu thành công ra file.\n";
+            else
+                std::cout << "-> [Lỗi] Không thể lưu dữ liệu ra file.\n";
+            pauseConsole();
+            break;
+        }
+        default:
+            std::cout << "Lựa chọn không hợp lệ!\n";
+        }
+    }
+}
+
 // =======================================================================
 // APPLICATION FACADE (ENCAPSULATING THE MAIN LOOP)
 // =======================================================================
@@ -570,6 +628,12 @@ void simulateProgram()
 {
     LibraryManager manager;
 
+    if (!loadLibraryData(manager))
+    {
+        std::cout << "-> [Lỗi] Không thể tải dữ liệu ban đầu từ file. Chương trình sẽ tiếp tục với dữ liệu trống.\n";
+        pauseConsole();
+    }
+
     while (true)
     {
         printMainMenu();
@@ -577,6 +641,10 @@ void simulateProgram()
 
         if (choice == 0)
         {
+            if (saveLibraryData(manager))
+                std::cout << "-> Dữ liệu đã được tự động lưu khi thoát chương trình.\n";
+            else
+                std::cout << "-> [Lỗi] Không thể tự động lưu dữ liệu khi thoát.\n";
             std::cout << "Cảm ơn bạn đã sử dụng hệ thống. Tạm biệt!\n";
             break;
         }
@@ -596,8 +664,7 @@ void simulateProgram()
             handleReportMenu(manager);
             break;
         case 5:
-            std::cout << "\n[FILE I/O] Chức năng đang được xây dựng ở module FileHandler...\n";
-            pauseConsole();
+            handleFileIOMenu(manager);
             break;
         default:
             std::cout << "Lỗi: Lựa chọn không hợp lệ!\n";

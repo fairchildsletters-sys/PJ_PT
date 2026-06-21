@@ -25,8 +25,10 @@ public:
     LinkedList<BorrowRecord *> borrowList;
 
     // Constructor
-    Reader(std::string _id, std::string _name, ReaderType _type)
-        : id(_id), name(_name), type(_type), debt(0) {}
+    Reader(std::string _id,
+       std::string _name,
+       ReaderType _type,
+       long long _debt = 0);
 
     // Copy Constructor
     Reader(const Reader &other)

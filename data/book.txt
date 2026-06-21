@@ -1,0 +1,50 @@
+B001|C++ Primer|Stanley B. Lippman|Programming|AVAILABLE|4|4|0
+B002|Clean Code|Robert C. Martin|Programming|AVAILABLE|3|3|0
+B003|Design Patterns|Erich Gamma|Software|READ_ON_SITE|2|2|0
+B004|The Pragmatic Programmer|Andrew Hunt|Programming|AVAILABLE|5|5|0
+B005|Introduction to Algorithms|Thomas H. Cormen|Algorithms|AVAILABLE|3|3|0
+B006|Effective Modern C++|Scott Meyers|Programming|MAINTENANCE|2|2|0
+B007|Refactoring|Martin Fowler|Software|AVAILABLE|3|3|0
+B008|Database System Concepts|Abraham Silberschatz|Database|AVAILABLE|4|4|0
+B009|Artificial Intelligence|Stuart Russell|AI|READ_ON_SITE|2|2|0
+B010|Python Crash Course|Eric Matthes|Programming|AVAILABLE|4|4|0
+B011|Computer Networks|Andrew S. Tanenbaum|Networks|AVAILABLE|3|3|0
+B012|Operating System Concepts|Abraham Silberschatz|Operating Systems|AVAILABLE|3|3|0
+B013|Modern Operating Systems|Andrew S. Tanenbaum|Operating Systems|MAINTENANCE|1|1|0
+B014|Deep Learning|Ian Goodfellow|AI|AVAILABLE|2|2|0
+B015|Head First Design Patterns|Eric Freeman|Software|AVAILABLE|3|3|0
+B016|Introduction to the Theory of Computation|Michael Sipser|Theory|AVAILABLE|2|2|0
+B017|Linear Algebra Done Right|Sheldon Axler|Mathematics|AVAILABLE|3|3|0
+B018|Computer Architecture|John L. Hennessy|Hardware|AVAILABLE|2|2|0
+B019|Software Engineering|Ian Sommerville|Software|AVAILABLE|4|4|0
+B020|Cybersecurity Essentials|Charles J. Brooks|Security|AVAILABLE|3|3|0
+B021|Algorithms Unlocked|Thomas H. Cormen|Algorithms|AVAILABLE|2|2|0
+B022|Data Science from Scratch|Joel Grus|Data Science|AVAILABLE|3|3|0
+B023|Principles of Compiler Design|Alfred Aho|Compiler|READ_ON_SITE|1|1|0
+B024|The C Programming Language|Brian W. Kernighan|Programming|AVAILABLE|4|4|0
+B025|Game Programming Patterns|Robert Nystrom|Programming|AVAILABLE|2|2|0
+B026|Unix Network Programming|W. Richard Stevens|Networks|AVAILABLE|2|2|0
+B027|Introduction to Functional Programming|Richard Bird|Programming|AVAILABLE|2|2|0
+B028|The Art of Computer Programming|Donald Knuth|Algorithms|MAINTENANCE|1|1|0
+B029|Pattern Recognition and Machine Learning|Christopher Bishop|AI|AVAILABLE|2|2|0
+B030|Computer Graphics|James D. Foley|Graphics|AVAILABLE|3|3|0
+B031|Natural Language Processing|Jacob Eisenstein|AI|AVAILABLE|2|2|0
+B032|Computer Vision|Richard Szeliski|AI|AVAILABLE|2|2|0
+B033|Modern Data Science|Joel Grus|Data Science|AVAILABLE|3|3|0
+B034|Embedded Systems Design|Peter Marwedel|Hardware|AVAILABLE|2|2|0
+B035|Digital Logic Design|M. Morris Mano|Hardware|AVAILABLE|3|3|0
+B036|Introduction to Information Retrieval|Christopher D. Manning|Search|AVAILABLE|2|2|0
+B037|Programming Pearls|Jon Bentley|Programming|AVAILABLE|2|2|0
+B038|Distributed Systems|Andrew S. Tanenbaum|Systems|AVAILABLE|3|3|0
+B039|Cloud Computing|Rajkumar Buyya|Systems|AVAILABLE|2|2|0
+B040|High Performance Computing|Charles Severance|Systems|AVAILABLE|2|2|0
+B041|Algorithm Design|Jon Kleinberg|Algorithms|AVAILABLE|3|3|0
+B042|Machine Learning|Tom M. Mitchell|AI|AVAILABLE|3|3|0
+B043|Probability and Statistics|Morris H. DeGroot|Mathematics|AVAILABLE|2|2|0
+B044|Computational Geometry|Mark de Berg|Algorithms|AVAILABLE|2|2|0
+B045|Introduction to Cryptography|Johannes Buchmann|Security|AVAILABLE|2|2|0
+B046|Big Data|Viktoria Toman|Data Science|AVAILABLE|2|2|0
+B047|Human-Computer Interaction|Alan Dix|UI|MAINTENANCE|2|2|0
+B048|Computer Security|William Stallings|Security|AVAILABLE|1|1|0
+B049|The Art of UNIX Programming|Eric S. Raymond|Systems|AVAILABLE|2|2|0
+B050|Computer Systems: A Programmers Perspective|Randal E. Bryant|Operating Systems|AVAILABLE|2|2|0

@@ -30,6 +30,26 @@ public:
     // =======================================================================
     LibraryManager() {}
 
+    const HashMap<std::string, Book *> &getBooks() const
+    {
+        return books;
+    }
+
+    HashMap<std::string, Book *> &getBooks()
+    {
+        return books;
+    }
+
+    const HashMap<std::string, Reader *> &getReaders() const
+    {
+        return readers;
+    }
+
+    HashMap<std::string, Reader *> &getReaders()
+    {
+        return readers;
+    }
+
     ~LibraryManager()
     {
         cleanUp();

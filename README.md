@@ -1,140 +1,122 @@
-# Nhom4_KTLT_20252
+# Hệ thống quản lý thư viện (PJ_PT)
 
-Hệ thống quản lý thư viện viết bằng C++ (giao diện dòng lệnh) với các tính năng CRUD ( thêm, sửa, xóa đối tượng sách, bạn đọc); nghiệp vụ mượn sách, thống kê số liệu
+Hệ thống quản lý thư viện bằng C++ với giao diện dòng lệnh. Ứng dụng hỗ trợ:
+- Quản lý sách, độc giả.
+- Nghiệp vụ mượn/trả sách.
+- Tính phạt trả quá hạn.
+- Báo cáo và thống kê đơn giản.
+- Lưu / tải dữ liệu từ file text.
 
-## Tổng quan
-Dự án này triển khai hệ thống quản lý thư viện theo yêu cầu học tập, bao gồm:
-- Lưu trữ dữ liệu ở dạng file text có cấu trúc (dạng block `key: value`).
-- Giao diện dòng lệnh (CLI) menu-driven cho người dùng.
-- Luật nghiệp vụ chính: mượn/trả sách, tính tiền phạt khi trả quá hạn.
-- Tìm kiếm và báo cáo thống kê.
-- Bộ kiểm thử: unit, integration và system tests.
+## Cấu trúc chính của dự án
+- `main.cpp`: điều khiển menu và tương tác với người dùng.
+- `manager/LibraryManager.h`: chứa logic nghiệp vụ quản lý sách, độc giả, mượn/trả.
+- `utils/FileHandler.h`, `utils/FileHandler.cpp`: nạp và lưu dữ liệu ra file.
+- `models/`: định nghĩa các lớp `Book`, `Reader`, `BorrowRecord`.
+- `datastructures/`: cài đặt `HashMap`, `LinkedList`, `Node`.
+- `data/`: lưu trữ file dữ liệu `book.txt`, `readers.txt`, `borrow_records.txt`.
+- `CMakeLists.txt`: cấu hình build với CMake.
+- `USAGE.md`: hướng dẫn sử dụng chi tiết.
 
-## Tính năng chính
+## Yêu cầu hệ thống
+- CMake 3.10 trở lên.
+- Trình biên dịch C++ hỗ trợ C++17.
+- Windows / Linux / macOS đều có thể build được.
 
-### Quản lý Sách
-- Thêm, sửa, xóa sách.
-- Theo dõi số lượng sẵn có và số lần đã mượn.
-- Tìm kiếm theo tiêu đề, tác giả hoặc thể loại.
-- Trạng thái sách: AVAILABLE, READ_ON_SITE, MAINTENANCE.
+## Cách build và chạy
+### Bước 1: Chuẩn bị build
+Mở terminal tại thư mục dự án (thư mục chứa file `CMakeLists.txt`).
 
-### Quản lý Độc giả
-- Thêm, sửa, xóa độc giả.
-- Hỗ trợ hai loại độc giả: Sinh viên (STUDENT) và Giảng viên (TEACHER).
-- Theo dõi nợ (phạt) và danh sách mượn hiện tại.
-
-### Mượn & Trả Sách
-- Hạn mức mượn: Sinh viên 3 cuốn, Giảng viên 5 cuốn.
-- Thời hạn mượn mặc định: 14 ngày.
-- Tự động tính tiền phạt khi trả muộn (mặc định 5.000 VND/ngày).
-- Không cho mượn nếu độc giả có sách quá hạn hoặc nợ tiền.
-
-### Báo cáo & Thống kê
-- Danh sách sách đang được mượn.
-- Danh sách sách quá hạn.
-- Top các sách được mượn nhiều nhất.
-
-### Lưu trữ Dữ liệu
-- Dữ liệu lưu dưới dạng file text có cấu trúc (mỗi bản ghi là một block `key: value`, cách nhau bởi dòng trống):
-  - `data/books.txt` (dữ liệu sách)
-  - `data/readers.txt` (dữ liệu độc giả)
-  - `data/borrow_records.txt` (dữ liệu giao dịch mượn)
-- Ứng dụng tự động load dữ liệu khi khởi động và lưu khi người dùng chọn "Save & Exit".
-
-## Cấu trúc dự án
-├── datastructures/  
-│   ├── Node.h
-│   ├── LinkedList.h
-│   └── HashMap.h
-├── models/               
-│   ├── Book.h
-│   ├── Reader.h
-│   └── BorrowRecord.h
-├── manager/             
-│   └── LibraryManager.h
-├── utils/               
-│   └── functional/
-│       ├── Hasher.h
-│       ├── MathUtils.h
-│       ├── TimeUtils.h
-│       └── ReportStructs.h
-├── test                 
-│
-├── main.cpp              
-├── ConsoleUI.h 
-├── USAGE.md           
-└── data/           
-    ├── books.txt
-    ├── readers.txt
-    └── borrow_records.txt
-
-
-## Công nghệ sử dụng
-
-- Ngôn ngữ: C++17
-- Hệ thống build: CMake 3.10+
-- Lưu trữ: file text có cấu trúc (block `key: value`)
-
-## Yêu cầu
-
-- Trình biên dịch C++ tương thích C++17 (GCC, Clang, MSVC)
-- CMake 3.10 trở lên (nếu sử dụng CMake)
-
-## Hướng dẫn ngắn chạy 
-
-### Run chương trình
-
-
-### Chạy test
-
-
-## Định dạng file dữ liệu (ví dụ)
-
-### `books.txt`
-Mỗi sách là một block gồm các dòng `key: value`, ví dụ:
-```
-id: B001
-title: The Great Gatsby
-author: F. Scott Fitzgerald
-genre: Fiction
-status: AVAILABLE
-totalQuantity: 3
-availableQuantity: 2
-borrowCount: 1
+### Bước 2: Tạo thư mục build
+```powershell
+mkdir build
+cd build
 ```
 
-### `readers.txt`
-```
-id: R001
-name: Tran Minh Duc
-type: STUDENT
-debt: 0
+### Bước 3: Generate CMake
+```powershell
+cmake ..
 ```
 
-### `borrow_records.txt`
-```
-recordId: R001_B001_1687000000
-readerId: R001
-bookId: B001
-borrowDate: 1687000000
-dueDate: 1687000000
+### Bước 4: Build
+```powershell
+cmake --build .
 ```
 
-## Menu & Tính năng 
+### Bước 5: Chạy chương trình
+```powershell
+.\PJ_PT.exe
+```
 
+> Trên Linux/macOS: `./PJ_PT`
 
-## Quy tắc nghiệp vụ chính
+## File dữ liệu hiện có
+- `data/book.txt`
+- `data/readers.txt`
+- `data/borrow_records.txt`
 
-- Hạn mức mượn: Sinh viên 3 sách, Giảng viên 5 sách.
-- Thời hạn mượn: 14 ngày.
-- Phạt: 5.000 VND/ngày (cấu hình trong `LibraryManager.h`).
-- Không cho mượn nếu độc giả có sách quá hạn hoặc còn nợ.
+### Định dạng `data/book.txt`
+Mỗi dòng là một bản ghi sách theo định dạng phân cách bởi ký tự `|`:
+```
+{id}|{title}|{author}|{genre}|{status}|{totalQuantity}|{availableQuantity}|{borrowCount}
+```
+Ví dụ:
+```
+B001|C++ Primer|Stanley B. Lippman|Programming|AVAILABLE|4|4|0
+```
 
+### Định dạng `data/readers.txt`
+Mỗi dòng là một bản ghi bạn đọc theo định dạng:
+```
+{id}|{name}|{type}|{debt}
+```
+Ví dụ:
+```
+R001|Alice Nguyen|STUDENT|15000
+```
 
-## Hướng phát triển 
+### Định dạng `data/borrow_records.txt`
+Mỗi dòng là một bản ghi giao dịch mượn:
+```
+{recordId}|{readerId}|{bookId}|{borrowDate}|{dueDate}
+```
+Ví dụ:
+```
+BR001|R001|B001|1710000000|1711209600
+```
 
-- Thêm giao diện đồ họa (Qt) hoặc web frontend.
-- Hỗ trợ xuất/nhập JSON hoặc lưu vào SQLite.
-- Thêm chức năng đặt trước (reservation) và thông báo quá hạn.
+## Chức năng chính
+### 1. Quản lý sách
+- Thêm sách mới.
+- Cập nhật sách nếu sách chưa được mượn.
+- Xóa sách nếu không còn bản sao đang được mượn.
+- Tìm kiếm theo ID, tiêu đề, tác giả hoặc thể loại.
+
+### 2. Quản lý bạn đọc
+- Thêm bạn đọc với ID, họ tên, loại và nợ phạt ban đầu.
+- Cập nhật tên và loại bạn đọc.
+- Xóa bạn đọc nếu không còn sách mượn.
+- Xem thông tin bạn đọc theo ID.
+
+### 3. Mượn / trả sách
+- Mượn sách: kiểm tra trạng thái sách, tồn kho, hạn mức, quá hạn và nợ phạt.
+- Trả sách: nếu trả quá hạn, hệ thống tự động tính tiền phạt và cộng vào `debt`.
+- Thanh toán nợ: cho phép người dùng nhập số tiền thanh toán.
+
+### 4. Báo cáo và thống kê
+- Sách đang được mượn.
+- Sách quá hạn.
+- Top 5 sách mượn nhiều nhất.
+
+## Lưu ý quan trọng
+- Ứng dụng dùng định dạng file `|` cho dữ liệu, không phải block `key: value`.
+- `readers.txt` đã hỗ trợ trường `debt`, ví dụ: `R001|Alice Nguyen|STUDENT|15000`.
+- Nợ phạt sẽ ngăn người đọc mượn sách mới nếu còn nợ.
+- Không nên chỉnh sửa trực tiếp file dữ liệu trong khi chương trình đang chạy.
+
+## Hướng dẫn sử dụng chi tiết
+Xem file `USAGE.md` để biết cách sử dụng từng chức năng.
+
+## Phần test
+Phần test sẽ bổ sung sau.
 
 
