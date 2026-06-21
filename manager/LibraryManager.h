@@ -1,12 +1,12 @@
 #ifndef LIBRARYMANAGER_H
 #define LIBRARYMANAGER_H
 
-#include "../datastructures/LinkedList.h"
-#include "../datastructures/HashMap.h"
-#include "../models/Book.h"
-#include "../models/Reader.h"
-#include "../models/BorrowRecord.h"
-#include "../utils/ReportStructs.h"
+#include "datastructures/LinkedList.h"
+#include "datastructures/HashMap.h"
+#include "models/Book.h"
+#include "models/Reader.h"
+#include "models/BorrowRecord.h"
+#include "utils/ReportStructs.h"
 #include <iostream>
 #include <iomanip>
 #include <string>

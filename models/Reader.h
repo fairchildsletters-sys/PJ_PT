@@ -3,7 +3,7 @@
 
 #include <string>
 #include "BorrowRecord.h"
-#include "../datastructures/LinkedList.h"
+#include "datastructures/LinkedList.h"
 
 enum class ReaderType
 {
