@@ -6,7 +6,7 @@
 #include "../models/Book.h"
 #include "../models/Reader.h"
 #include "../models/BorrowRecord.h"
-#include "../utils/functional/ReportStructs.h"
+#include "../utils/ReportStructs.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
