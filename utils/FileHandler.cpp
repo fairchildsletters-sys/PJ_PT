@@ -9,7 +9,7 @@ namespace FileHandler
     // ENUM HELPERS
     // ==========================================================
 
-    static BookStatus stringToBookStatus(const std::string& str)
+    static BookStatus stringToBookStatus(const std::string &str)
     {
         if (str == "READ_ON_SITE")
             return BookStatus::READ_ON_SITE;
@@ -35,7 +35,7 @@ namespace FileHandler
         }
     }
 
-    static ReaderType stringToReaderType(const std::string& str)
+    static ReaderType stringToReaderType(const std::string &str)
     {
         return (str == "TEACHER")
                    ? ReaderType::TEACHER
@@ -53,8 +53,8 @@ namespace FileHandler
     // BOOK
     // ==========================================================
 
-    static bool parseBookLine(const std::string& line,
-                              Book*& book)
+    static bool parseBookLine(const std::string &line,
+                              Book *&book)
     {
         std::istringstream iss(line);
 
@@ -116,37 +116,42 @@ namespace FileHandler
         }
     }
 
-bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
-    std::ifstream file(path);
-    if (!file.is_open()) {
-        std::ofstream create(path);
-        return true; 
-    }
-
-    std::string line;
-    int lineCount = 0; // Thêm biến đếm dòng để báo lỗi dòng nào
-    while (std::getline(file, line)) {
-        lineCount++;
-        if (line.empty()) continue;
-
-        Book* book = nullptr;
-        if (!parseBookLine(line, book)) {
-            // [TESTBENCH: BÁO LỖI DÒNG HỎNG]
-            std::cerr << "Canh bao: Du lieu dong " << lineCount << " bi loi, bo qua!" << std::endl;
-            delete book; // Đảm bảo không rò rỉ
-            continue;
+    bool loadBooks(const std::string &path, HashMap<std::string, Book *> &books)
+    {
+        std::ifstream file(path);
+        if (!file.is_open())
+        {
+            return false;
         }
 
-        if (!books.add(book->getId(), book)) {
-            // [TESTBENCH: BÁO TRÙNG ID]
-            std::cerr << "Canh bao: ID trung lap tai dong " << lineCount << ", bo qua!" << std::endl;
-            delete book;
+        std::string line;
+        int lineCount = 0; // Thêm biến đếm dòng để báo lỗi dòng nào
+        while (std::getline(file, line))
+        {
+            lineCount++;
+            if (line.empty())
+                continue;
+
+            Book *book = nullptr;
+            if (!parseBookLine(line, book))
+            {
+                // [TESTBENCH: BÁO LỖI DÒNG HỎNG]
+                std::cerr << "Canh bao: Du lieu dong " << lineCount << " bi loi, bo qua!" << std::endl;
+                delete book; // Đảm bảo không rò rỉ
+                continue;
+            }
+
+            if (!books.add(book->getId(), book))
+            {
+                // [TESTBENCH: BÁO TRÙNG ID]
+                std::cerr << "Canh bao: ID trung lap tai dong " << lineCount << ", bo qua!" << std::endl;
+                delete book;
+            }
         }
+        return true;
     }
-    return true;
-}
-    bool saveBooks(const std::string& path,
-                   const HashMap<std::string, Book*>& books)
+    bool saveBooks(const std::string &path,
+                   const HashMap<std::string, Book *> &books)
     {
         std::ofstream file(path);
 
@@ -157,7 +162,7 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
              it != books.end();
              ++it)
         {
-            const Book* book = it->value;
+            const Book *book = it->value;
 
             file << book->getId() << '|'
                  << book->title << '|'
@@ -178,8 +183,8 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
     // READER
     // ==========================================================
 
-    static bool parseReaderLine(const std::string& line,
-                                Reader*& reader)
+    static bool parseReaderLine(const std::string &line,
+                                Reader *&reader)
     {
         std::istringstream iss(line);
 
@@ -218,16 +223,14 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
         }
     }
 
-    bool loadReaders(const std::string& path,
-                     HashMap<std::string, Reader*>& readers)
+    bool loadReaders(const std::string &path,
+                     HashMap<std::string, Reader *> &readers)
     {
         std::ifstream file(path);
 
         if (!file.is_open())
         {
-            std::ofstream create(path);
-            create.close();
-            return true;
+            return false;
         }
 
         std::string line;
@@ -237,7 +240,7 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
             if (line.empty())
                 continue;
 
-            Reader* reader = nullptr;
+            Reader *reader = nullptr;
 
             if (!parseReaderLine(line, reader))
             {
@@ -254,8 +257,8 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
         return true;
     }
 
-    bool saveReaders(const std::string& path,
-                     const HashMap<std::string, Reader*>& readers)
+    bool saveReaders(const std::string &path,
+                     const HashMap<std::string, Reader *> &readers)
     {
         std::ofstream file(path);
 
@@ -264,10 +267,10 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
 
         for (auto it = readers.begin(); it != readers.end(); ++it)
         {
-            const Reader* reader = it->value;
-            file << reader->getId() << '|' \
-                 << reader->name << '|' \
-                 << readerTypeToString(reader->type) << '|' \
+            const Reader *reader = it->value;
+            file << reader->getId() << '|'
+                 << reader->name << '|'
+                 << readerTypeToString(reader->type) << '|'
                  << reader->debt << '\n';
         }
 
@@ -275,9 +278,9 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
         return true;
     }
 
-    static bool parseBorrowRecordLine(const std::string& line,
-                                      HashMap<std::string, Reader*>& readers,
-                                      const HashMap<std::string, Book*>& books)
+    static bool parseBorrowRecordLine(const std::string &line,
+                                      HashMap<std::string, Reader *> &readers,
+                                      const HashMap<std::string, Book *> &books)
     {
         std::istringstream iss(line);
         std::string recordId;
@@ -305,13 +308,13 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
             auto readerIt = readers.find(readerId);
             if (readerIt == readers.end())
                 return false;
-            Reader* reader = readerIt->value;
+            Reader *reader = readerIt->value;
 
             auto bookIt = books.find(bookId);
             if (bookIt == books.end())
                 return false;
 
-            BorrowRecord* record = new BorrowRecord(recordId, bookId, borrowTime, returnTime);
+            BorrowRecord *record = new BorrowRecord(recordId, bookId, borrowTime, returnTime);
             reader->borrowList.insertAtHead(record);
             return true;
         }
@@ -321,17 +324,15 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
         }
     }
 
-    bool loadBorrowRecords(const std::string& path,
-                           HashMap<std::string, Reader*>& readers,
-                           const HashMap<std::string, Book*>& books)
+    bool loadBorrowRecords(const std::string &path,
+                           HashMap<std::string, Reader *> &readers,
+                           const HashMap<std::string, Book *> &books)
     {
         std::ifstream file(path);
 
         if (!file.is_open())
         {
-            std::ofstream create(path);
-            create.close();
-            return true;
+            return false;
         }
 
         std::string line;
@@ -348,8 +349,8 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
         return true;
     }
 
-    bool saveBorrowRecords(const std::string& path,
-                           const HashMap<std::string, Reader*>& readers)
+    bool saveBorrowRecords(const std::string &path,
+                           const HashMap<std::string, Reader *> &readers)
     {
         std::ofstream file(path);
 
@@ -358,15 +359,15 @@ bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
 
         for (auto it = readers.begin(); it != readers.end(); ++it)
         {
-            const Reader* reader = it->value;
-            Node<BorrowRecord*>* current = reader->borrowList.getHead();
+            const Reader *reader = it->value;
+            Node<BorrowRecord *> *current = reader->borrowList.getHead();
             while (current != nullptr)
             {
-                BorrowRecord* record = current->data;
-                file << record->recordId << '|' \
-                     << reader->getId() << '|' \
-                     << record->bookId << '|' \
-                     << record->borrowDate << '|' \
+                BorrowRecord *record = current->data;
+                file << record->recordId << '|'
+                     << reader->getId() << '|'
+                     << record->bookId << '|'
+                     << record->borrowDate << '|'
                      << record->dueDate << '\n';
                 current = current->next;
             }
