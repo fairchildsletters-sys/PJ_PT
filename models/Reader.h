@@ -26,9 +26,10 @@ public:
 
     // Constructor
     Reader(std::string _id,
-       std::string _name,
-       ReaderType _type,
-       long long _debt = 0);
+           std::string _name,
+           ReaderType _type,
+           long long _debt = 0)
+        : id(_id), name(_name), type(_type), debt(_debt) {}
 
     // Copy Constructor
     Reader(const Reader &other)

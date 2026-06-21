@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/PJ_PT.dir/main.cpp.o CMakeFiles/PJ_PT.dir/utils/FileHandler.cpp.o -o PJ_PT 

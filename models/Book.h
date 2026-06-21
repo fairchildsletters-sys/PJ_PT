@@ -27,13 +27,19 @@ public:
 
     // Constructor
     Book(std::string _id,
-     std::string _title,
-     std::string _author,
-     std::string _genre,
-     BookStatus _status,
-     int _totalQty,
-     int _availableQty = -1,
-     int _borrowCount = 0);
+         std::string _title,
+         std::string _author,
+         std::string _genre,
+         BookStatus _status,
+         int _totalQty,
+         int _availableQty = -1,
+         int _borrowCount = 0)
+        : id(_id), title(_title), author(_author), genre(_genre), status(_status),
+          totalQuantity(_totalQty),
+          availableQuantity(_availableQty == -1 ? _totalQty : _availableQty),
+          borrowCount(_borrowCount)
+    {
+    }
 
     // Copy Constructor
     Book(const Book &other)
