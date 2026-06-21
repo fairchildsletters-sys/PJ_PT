@@ -3,6 +3,7 @@
 #include <string>
 #include <limits>
 #include <iomanip>
+#include <ctime>  // <-- THÊM CHÍNH XÁC DÒNG NÀY VÀO ĐÂY
 #include "utils/FileHandler.h"
 
 static const std::string BOOKS_FILE = "data/book.txt";
