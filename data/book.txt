@@ -1,9 +1,9 @@
-B001|C++ Primer|Stanley B. Lippman|Programming|AVAILABLE|4|4|0
-B002|Clean Code|Robert C. Martin|Programming|AVAILABLE|3|3|0
-B003|Design Patterns|Erich Gamma|Software|READ_ON_SITE|2|2|0
-B004|The Pragmatic Programmer|Andrew Hunt|Programming|AVAILABLE|5|5|0
-B005|Introduction to Algorithms|Thomas H. Cormen|Algorithms|AVAILABLE|3|3|0
-B006|Effective Modern C++|Scott Meyers|Programming|MAINTENANCE|2|2|0
+B001|C++ Primer|Stanley B. Lippman|Programming|AVAILABLE|4|4|25
+B002|Clean Code|Robert C. Martin|Programming|AVAILABLE|3|3|28
+B003|Design Patterns|Erich Gamma|Software|READ_ON_SITE|2|2|22
+B004|The Pragmatic Programmer|Andrew Hunt|Programming|AVAILABLE|5|5|15
+B005|Introduction to Algorithms|Thomas H. Cormen|Algorithms|AVAILABLE|3|3|18
+B006|Effective Modern C++|Scott Meyers|Programming|MAINTENANCE|2|2|8
 B007|Refactoring|Martin Fowler|Software|AVAILABLE|3|3|0
 B008|Database System Concepts|Abraham Silberschatz|Database|AVAILABLE|4|4|0
 B009|Artificial Intelligence|Stuart Russell|AI|READ_ON_SITE|2|2|0
