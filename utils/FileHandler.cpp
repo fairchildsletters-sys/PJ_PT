@@ -3,6 +3,16 @@
 #include <sstream>
 #include <iostream>
 
+#ifndef PROJECT_ROOT
+#define PROJECT_ROOT "."
+#endif
+
+// Helper: Convert relative path -> absolute path
+static std::string getActualPath(const std::string &relativePath)
+{
+    return std::string(PROJECT_ROOT) + "/" + relativePath;
+}
+
 namespace FileHandler
 {
     // ==========================================================
@@ -118,14 +128,14 @@ namespace FileHandler
 
     bool loadBooks(const std::string &path, HashMap<std::string, Book *> &books)
     {
-        std::ifstream file(path);
+        std::ifstream file(getActualPath(path)); // Mở để ĐỌC
         if (!file.is_open())
         {
             return false;
         }
 
         std::string line;
-        int lineCount = 0; // Thêm biến đếm dòng để báo lỗi dòng nào
+        int lineCount = 0;
         while (std::getline(file, line))
         {
             lineCount++;
@@ -135,25 +145,24 @@ namespace FileHandler
             Book *book = nullptr;
             if (!parseBookLine(line, book))
             {
-                // [TESTBENCH: BÁO LỖI DÒNG HỎNG]
                 std::cerr << "Canh bao: Du lieu dong " << lineCount << " bi loi, bo qua!" << std::endl;
-                delete book; // Đảm bảo không rò rỉ
+                delete book;
                 continue;
             }
 
             if (!books.add(book->getId(), book))
             {
-                // [TESTBENCH: BÁO TRÙNG ID]
                 std::cerr << "Canh bao: ID trung lap tai dong " << lineCount << ", bo qua!" << std::endl;
                 delete book;
             }
         }
         return true;
     }
+
     bool saveBooks(const std::string &path,
                    const HashMap<std::string, Book *> &books)
     {
-        std::ofstream file(path);
+        std::ofstream file(getActualPath(path)); // Mở để GHI
 
         if (!file.is_open())
             return false;
@@ -226,7 +235,7 @@ namespace FileHandler
     bool loadReaders(const std::string &path,
                      HashMap<std::string, Reader *> &readers)
     {
-        std::ifstream file(path);
+        std::ifstream file(getActualPath(path)); // Mở để ĐỌC
 
         if (!file.is_open())
         {
@@ -260,7 +269,7 @@ namespace FileHandler
     bool saveReaders(const std::string &path,
                      const HashMap<std::string, Reader *> &readers)
     {
-        std::ofstream file(path);
+        std::ofstream file(getActualPath(path)); // Mở để GHI
 
         if (!file.is_open())
             return false;
@@ -277,6 +286,10 @@ namespace FileHandler
         file.flush();
         return true;
     }
+
+    // ==========================================================
+    // BORROW RECORDS
+    // ==========================================================
 
     static bool parseBorrowRecordLine(const std::string &line,
                                       HashMap<std::string, Reader *> &readers,
@@ -328,7 +341,7 @@ namespace FileHandler
                            HashMap<std::string, Reader *> &readers,
                            const HashMap<std::string, Book *> &books)
     {
-        std::ifstream file(path);
+        std::ifstream file(getActualPath(path)); // Mở để ĐỌC
 
         if (!file.is_open())
         {
@@ -352,7 +365,7 @@ namespace FileHandler
     bool saveBorrowRecords(const std::string &path,
                            const HashMap<std::string, Reader *> &readers)
     {
-        std::ofstream file(path);
+        std::ofstream file(getActualPath(path)); // Mở để GHI
 
         if (!file.is_open())
             return false;
