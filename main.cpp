@@ -3,7 +3,7 @@
 #include <string>
 #include <limits>
 #include <iomanip>
-#include <ctime>  // <-- THÊM CHÍNH XÁC DÒNG NÀY VÀO ĐÂY
+#include <ctime> // <-- THÊM CHÍNH XÁC DÒNG NÀY VÀO ĐÂY
 #include "utils/FileHandler.h"
 
 static const std::string BOOKS_FILE = "data/book.txt";
@@ -264,7 +264,16 @@ void handleReaderMenu(LibraryManager &manager)
             std::string name = readString();
 
             int typeInt = readInt("Phân loại (0: Sinh viên, 1: Giảng viên): ");
-            long long debt = readLongLong("Nợ phạt ban đầu (VND, có thể nhập 0): ");
+            long long debt;
+            while (true)
+            {
+                debt = readLongLong("Nợ phạt ban đầu (VND): ");
+                if (debt >= 0)
+                {
+                    break;
+                }
+                std::cout << "-> [Lỗi] Dư nợ không được phép âm. Vui lòng nhập lại!\n";
+            }
 
             Reader newReader(id, name, static_cast<ReaderType>(typeInt), debt);
             auto status = manager.addReader(newReader);
