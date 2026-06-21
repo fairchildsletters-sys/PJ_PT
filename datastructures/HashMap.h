@@ -2,8 +2,8 @@
 #define HASHMAP_H
 
 #include "LinkedList.h"
-#include "MathUtils.h"
-#include "Hasher.h"
+#include "../utils/MathUtils.h"
+#include "../utils/Hasher.h"
 #include <string>
 
 template <typename K, typename V>
