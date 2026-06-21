@@ -1,0 +1,3 @@
+/home/this_computer/DATA/Jewel_Box_of_the_System/My_university_time_0/Semesters/No_4/Projects/PJ_PT/build/CMakeFiles/PJ_PT.dir
+/home/this_computer/DATA/Jewel_Box_of_the_System/My_university_time_0/Semesters/No_4/Projects/PJ_PT/build/CMakeFiles/edit_cache.dir
+/home/this_computer/DATA/Jewel_Box_of_the_System/My_university_time_0/Semesters/No_4/Projects/PJ_PT/build/CMakeFiles/rebuild_cache.dir

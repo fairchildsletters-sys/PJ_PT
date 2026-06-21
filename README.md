@@ -1,4 +1,4 @@
-# Hệ thống quản lý thư viện (PJ_PT)
+# Hệ thống quản lý thư viện 
 
 Hệ thống quản lý thư viện bằng C++ với giao diện dòng lệnh. Ứng dụng hỗ trợ:
 - Quản lý sách, độc giả.
@@ -114,9 +114,9 @@ BR001|R001|B001|1710000000|1711209600
 - Không nên chỉnh sửa trực tiếp file dữ liệu trong khi chương trình đang chạy.
 
 ## Hướng dẫn sử dụng chi tiết
-Xem file `USAGE.md` để biết cách sử dụng từng chức năng.
+
 
 ## Phần test
-Phần test sẽ bổ sung sau.
+
 
 
