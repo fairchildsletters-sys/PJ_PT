@@ -1,6 +1,7 @@
 #include "FileHandler.h"
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 namespace FileHandler
 {
@@ -115,42 +116,35 @@ namespace FileHandler
         }
     }
 
-    bool loadBooks(const std::string& path,
-                   HashMap<std::string, Book*>& books)
-    {
-        std::ifstream file(path);
-
-        if (!file.is_open())
-        {
-            std::ofstream create(path);
-            create.close();
-            return true;
-        }
-
-        std::string line;
-
-        while (std::getline(file, line))
-        {
-            if (line.empty())
-                continue;
-
-            Book* book = nullptr;
-
-            if (!parseBookLine(line, book))
-            {
-                delete book;
-                continue;
-            }
-
-            if (!books.add(book->getId(), book))
-            {
-                delete book;
-            }
-        }
-
-        return true;
+bool loadBooks(const std::string& path, HashMap<std::string, Book*>& books) {
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        std::ofstream create(path);
+        return true; 
     }
 
+    std::string line;
+    int lineCount = 0; // Thêm biến đếm dòng để báo lỗi dòng nào
+    while (std::getline(file, line)) {
+        lineCount++;
+        if (line.empty()) continue;
+
+        Book* book = nullptr;
+        if (!parseBookLine(line, book)) {
+            // [TESTBENCH: BÁO LỖI DÒNG HỎNG]
+            std::cerr << "Canh bao: Du lieu dong " << lineCount << " bi loi, bo qua!" << std::endl;
+            delete book; // Đảm bảo không rò rỉ
+            continue;
+        }
+
+        if (!books.add(book->getId(), book)) {
+            // [TESTBENCH: BÁO TRÙNG ID]
+            std::cerr << "Canh bao: ID trung lap tai dong " << lineCount << ", bo qua!" << std::endl;
+            delete book;
+        }
+    }
+    return true;
+}
     bool saveBooks(const std::string& path,
                    const HashMap<std::string, Book*>& books)
     {
