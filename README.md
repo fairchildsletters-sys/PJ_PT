@@ -137,7 +137,7 @@ Mục đích của quá trình kiểm thử là xác nhận hệ thống hoạt 
 #### Test Case : Thống kê Top 5 sách được mượn nhiều nhất
 
 ### Đánh giá kết quả kiểm thử
-Quá trình kiểm thử được thực hiện trên toàn bộ các chức năng chính của hệ thống bao gồm quản lý sách, quản lý bạn đọc, nghiệp vụ mượn/trả sách, xử lý công nợ, lưu trữ dữ liệu và thống kê báo cáo. 
+Quá trình kiểm thử được thực hiện trên các chức năng chính của hệ thống bao gồm quản lý sách, quản lý bạn đọc, nghiệp vụ mượn/trả sách, xử lý công nợ, lưu trữ dữ liệu và thống kê báo cáo. 
 Kết quả cho thấy các chức năng hoạt động đúng theo yêu cầu thiết kế, dữ liệu được lưu trữ và khôi phục chính xác, các điều kiện nghiệp vụ được kiểm soát đầy đủ và không phát hiện lỗi nghiêm trọng ảnh hưởng đến tính ổn định của hệ thống.
 
 
