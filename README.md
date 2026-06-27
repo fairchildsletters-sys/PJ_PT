@@ -113,28 +113,28 @@ BR001|R001|B001|1710000000|1711209600
 - Nợ phạt sẽ ngăn người đọc mượn sách mới nếu còn nợ.
 - Không nên chỉnh sửa trực tiếp file dữ liệu trong khi chương trình đang chạy.
 
-## KIỂM THỬ HỆ THỐNG 
+## Kiểm thử hệ thống
 Mục đích của quá trình kiểm thử là xác nhận hệ thống hoạt động đúng với các yêu cầu nghiệp vụ đã đề ra, đảm bảo dữ liệu được xử lý chính xác và các tình huống ngoại lệ được kiểm soát phù hợp.
 ### 1. Kiểm thử chức năng quản lý sách
-Test Case : Thêm sách mới thành công
-Test Case : Thêm sách trùng mã
-Test Case : Xóa sách đang được mượn
+#### Test Case : Thêm sách mới thành công
+#### Test Case : Thêm sách trùng mã
+#### Test Case : Xóa sách đang được mượn
 ### 2. Kiểm thử chức năng quản lý bạn đọc
-Test Case : Thêm bạn đọc mới
+#### Test Case : Thêm bạn đọc mới
 ### 3. Kiểm thử nghiệp vụ mượn sách
-Test Case : Mượn sách thành công
-Test Case : Mượn sách khi hết số lượng
-Test Case : Mượn sách khi còn nợ phạt
+#### Test Case : Mượn sách thành công
+#### Test Case : Mượn sách khi hết số lượng
+#### Test Case : Mượn sách khi còn nợ phạt
 ### 4. Kiểm thử nghiệp vụ trả sách
-Test Case : Trả sách đúng hạn
-Test Case : Trả sách quá hạn
+#### Test Case : Trả sách đúng hạn
+#### Test Case : Trả sách quá hạn
 ### 5. Kiểm thử đọc/ghi file
-Test Case : Lưu dữ liệu xuống file
-Test Case : Nạp dữ liệu từ file
+#### Test Case : Lưu dữ liệu xuống file
+#### Test Case : Nạp dữ liệu từ file
 ### 6. Kiểm thử thống kê và báo cáo
-Test Case : Thống kê sách đang được mượn
-Test Case : Thống kê sách quá hạn
-Test Case : Thống kê Top 5 sách được mượn nhiều nhất
+#### Test Case : Thống kê sách đang được mượn
+#### Test Case : Thống kê sách quá hạn
+#### Test Case : Thống kê Top 5 sách được mượn nhiều nhất
 
 ### Đánh giá kết quả kiểm thử
 Quá trình kiểm thử được thực hiện trên toàn bộ các chức năng chính của hệ thống bao gồm quản lý sách, quản lý bạn đọc, nghiệp vụ mượn/trả sách, xử lý công nợ, lưu trữ dữ liệu và thống kê báo cáo. 
